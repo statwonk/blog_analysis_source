@@ -15,15 +15,11 @@ business_average <- 300
 
 # E(x) of EXP(1/rate)
 consumer_responses <- rexp(consumers, rate = 1/consumer_average)
-business_responses <- rexp(consumers, rate = 1/business_average) 
+business_responses <- rexp(businesses, rate = 1/business_average) 
 
-df <- data.frame(Consumers = consumer_responses,
-                 Businesses = business_responses)
+df <- data.frame(group = c(rep("Consumers", consumers), rep("Businesses", businesses)),
+                 value = c(consumer_responses, business_responses))
 
-# install.packages("reshape2")
-library(reshape2)
-
-df <- melt(df)
 names(df) <- c("group", "willingness_to_pay")
 
 # install.packages("ggplot2") # uncomment to install
